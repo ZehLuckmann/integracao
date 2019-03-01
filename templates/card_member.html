@@ -1,0 +1,62 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+@page {
+  margin: 0;
+}
+
+html {
+    /* off-white, so body edge is visible in browser */
+    background: #eee;
+}
+
+body {
+    /* A5 dimensions */
+    height: 108mm;
+    width: 172mm;
+
+    margin: 0;
+}
+
+/* fill half the height with each face */
+.face {
+    height: 50%;
+    width: 100%;
+    background: #aabbcc;
+    position: relative;
+}
+
+/* the back face */
+.face-back {
+    background: #f1e6a6;
+}
+
+/* the front face */
+.face-front {
+    background: #fff;
+}
+
+/* an image that fills the whole of the front face */
+.face-front img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+<title>Imprimir Carteirinha</title>
+<body>
+    <div class="face face-back">
+    Atlética: AAASC - Associação Academica de Sistemas e Computação<br />
+    Membro: {{member.name}}<br />
+    Apelido: {{member.nickname}}<br />
+    </div>
+    <div class="face face-front">
+      CARTEIRINHA AAASC<br />
+      [QR CODE]
+
+    </div>
+</body>

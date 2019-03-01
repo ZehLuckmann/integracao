@@ -1,0 +1,13 @@
+Click
+Flask
+Flask-SQLAlchemy
+itsdangerous
+Jinja2
+MarkupSafe
+SQLAlchemy
+Werkzeug
+flask_basicauth
+Flask-Migrate
+psycopg2
+gunicorn
+Flask-Heroku

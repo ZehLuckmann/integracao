@@ -1,0 +1,48 @@
+
+{% extends "template.html" %}
+{% block page_title %}Membros{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col">
+
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Membros</h4>
+        <p class="category"><a href="{{url_for('edit_member')}}" class="btn btn-success">Novo membro</a></p>
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-hover">
+          <thead class="text-success">
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Telefone</th>
+            <th class="text-right">Ações</th>
+          </thead>
+          <tbody>
+            {% for member in members %}
+              <tr>
+                <td>{{ member.id }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.nickname }}</td>
+                <td>{{ member.telephone }}</td>
+                <td class="td-actions text-right">
+                  <a href="{{url_for('card_member', member_id=member.id)}}" rel="tooltip" class="btn btn-info btn-round">
+                      <i class="material-icons">credit_card</i>
+                  </a>
+                  <a href="{{url_for('edit_member', member_id=member.id)}}" rel="tooltip" class="btn btn-success btn-round">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a href="{{url_for('delete_member', member_id=member.id)}}" rel="tooltip" class="btn btn-danger btn-round">
+                      <i class="material-icons">delete</i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

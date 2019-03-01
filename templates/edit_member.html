@@ -1,0 +1,124 @@
+
+{% extends "template.html" %}
+{% block page_title %}Membros{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Editar Membro</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_member',member_id=member.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="bmd-label-floating">Atlética</label>
+                <input type="text" class="form-control" disabled value="AAASC">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="bmd-label-floating">Usuário</label>
+                <input type="text" class="form-control" name="username" id="username" value="{{member.username or ''}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{member.email or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Nome</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{member.name or ''}}">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Apelido</label>
+                <input type="text" class="form-control" name="nickname" id="nickname" value="{{member.nickname or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Endereço</label>
+                <input type="text" class="form-control"  name="adress" id="adress" value="{{member.adress or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Cidade</label>
+                <input type="text" class="form-control" name="city" id="city" value="{{member.city or ''}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">País</label>
+                <input type="text" class="form-control"  name="country" id="country" value="{{member.country or ''}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Telefone</label>
+                <input type="text" class="form-control"  name="telephone" id="telephone" value="{{member.telephone or ''}}">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <input type="file" id="profile_photo[]" name="profile_photo[]" class="inputFileHidden">
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Sobre</label>
+                <div class="form-group">
+                  <label class="bmd-label-floating"> Conte um pouco sobre este membro.</label>
+                  <textarea class="form-control" rows="5" name="about" id="about">{{member.about or ''}}</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar Perfil</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <img class="img" src="{{ url_for('static', filename='resources/profiles') }}/{{member.id}}.png" />
+
+      </div>
+      <div class="card-body">
+        <!--<h6 class="card-category text-gray">CEO / Co-Founder</h6>-->
+        <h4 class="card-title">{{member.nickname or ''}}</h4>
+        <p class="card-description">
+          {{member.about or ''}}
+        </p>
+        <!--<a href="#pablo" class="btn btn-primary btn-round">Follow</a>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById("file").onchange = function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById("image").src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
+{% endblock %}
