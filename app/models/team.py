@@ -1,21 +1,29 @@
-#coding:utf-8
+# app/medels/team.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
-from models.member import Member
+from app import db
+from app.models.member import Member
 
 team_member = db.Table('team_member', db.Model.metadata,
-    db.Column('team_id', db.Integer, db.ForeignKey('team.id')),
-    db.Column('member_id', db.Integer, db.ForeignKey('member.id'))
-)
+                       db.Column('team_id',
+                                 db.Integer,
+                                 db.ForeignKey('team.id')),
+                       db.Column('member_id',
+                                 db.Integer,
+                                 db.ForeignKey('member.id'))
+                       )
+
+
 class Team(db.Model):
     __tablename__ = "team"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.String)
-    members = db.relationship("Member",secondary=team_member)
+    members = db.relationship("Member", secondary=team_member)
 
     _loaded = False
 

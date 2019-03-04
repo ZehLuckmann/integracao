@@ -1,12 +1,9 @@
-#coding:utf-8
+# app/controllers/member.py
+# coding:utf-8
+
 from flask import Flask, render_template, request, redirect, url_for
-from application import app
-from models.member import Member
-from models.event import Event
-from models.financial import Financial
-from models.product import Product
-from models.team import Team
-from models.training import Training
+from app import app
+from app.models.member import Member
 import os
 import datetime
 
@@ -16,6 +13,7 @@ import datetime
 def edit_member(member_id=-1):
     member = Member.load(member_id)
     return render_template("edit_member.html", member=member)
+
 
 @app.route("/member/save", methods=['GET', 'POST'])
 @app.route("/member/save/<int:member_id>", methods=['GET', 'POST'])
@@ -44,16 +42,19 @@ def save_member(member_id=-1):
 
         return redirect(url_for("list_member"))
 
+
 @app.route("/member/")
 @app.route('/member/list')
 def list_member():
     members = Member.load_all()
     return render_template("list_member.html", members=members)
 
+
 @app.route("/member/delete/<int:member_id>")
 def delete_member(member_id):
     Member.delete(member_id)
     return redirect(url_for('list_member'))
+
 
 @app.route("/member/card/<int:member_id>")
 def card_member(member_id):

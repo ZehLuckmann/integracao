@@ -1,9 +1,12 @@
-#coding:utf-8
+# app/medels/event.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
+from app import db
+
 
 class Event(db.Model):
     __tablename__ = "event"
@@ -21,12 +24,14 @@ class Event(db.Model):
             return int(datetime.datetime.strftime(self.date, '%Y'))
         else:
             return False
+
     @property
     def month_date(self):
         if self.date:
             return int(datetime.datetime.strftime(self.date, '%m'))
         else:
             return False
+
     @property
     def day_date(self):
         if self.date:
@@ -65,7 +70,6 @@ class Event(db.Model):
         else:
             return Event()
 
-
     @staticmethod
     def load_all():
         result = Event.query.all()
@@ -75,3 +79,4 @@ class Event(db.Model):
     def delete(id):
         db.session.delete(Event.query.filter_by(id=id).first())
         db.session.commit()
+        

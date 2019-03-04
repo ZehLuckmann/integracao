@@ -1,9 +1,12 @@
-#coding:utf-8
+# app/medels/product.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
+from app import db
+
 
 class Product(db.Model):
     __tablename__ = "product"
@@ -21,7 +24,7 @@ class Product(db.Model):
 
     @str_price.setter
     def str_price(self, price):
-        self.price =float(price)
+        self.price = float(price)
 
     def save(self):
         if self.id != -1:

@@ -1,9 +1,12 @@
-#coding:utf-8
+# app/medels/financial.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
+from app import db
+
 
 class Financial(db.Model):
     __tablename__ = "financial"
@@ -16,12 +19,12 @@ class Financial(db.Model):
     category = db.Column(db.Integer)
 
     _loaded = False
+
     def __init__(self, id=-1):
         if id != -1:
-            self.id=id
+            self.id = id
         return
 
-    #GETTERS AND SETTERS
     @property
     def str_category(self):
         if self.category == 1:
@@ -52,7 +55,7 @@ class Financial(db.Model):
 
     @str_value.setter
     def str_value(self, value):
-        self.value =float(value)
+        self.value = float(value)
 
     @property
     def str_date(self):

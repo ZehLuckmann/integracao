@@ -1,9 +1,12 @@
-#coding:utf-8
+# app/medels/member.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
+from app import db
+
 
 class Member(db.Model):
     __tablename__ = "member"

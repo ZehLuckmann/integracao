@@ -1,9 +1,12 @@
-#coding:utf-8
+# app/medels/training.py
+# coding:utf-8
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import datetime
-from database import db
+from app import db
+
 
 class Training(db.Model):
     __tablename__ = "training"
