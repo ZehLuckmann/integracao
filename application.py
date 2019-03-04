@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_basicauth import BasicAuth
 import os
 import database
 
@@ -14,13 +13,23 @@ app.config['BASIC_AUTH_PASSWORD'] = 'matrix'
 app.secret_key = "any random string"
 
 database.db = SQLAlchemy(app)
-basic_auth = BasicAuth(app)
 
-from models import *
+from models.member import Member
+from models.event import Event
+from models.financial import Financial
+from models.product import Product
+from models.team import Team
+from models.training import Training
 
 database.db.create_all()
 
-from controllers import *
+from controllers.defaults import *
+from controllers.member import *
+from controllers.event import *
+from controllers.financial import *
+from controllers.product import *
+from controllers.team import *
+from controllers.training import *
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
