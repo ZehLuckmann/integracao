@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+{% block page_title %}Eventos{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col">
+
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Eventos</h4>
+        <p class="category">
+          <a href="{{url_for('edit_event')}}" class="btn btn-success">Novo evento</a>
+        </p>
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-hover">
+          <thead class="text-success">
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Data</th>
+            <th class="text-right">Ações</th>
+          </thead>
+          <tbody>
+            {% for event in events %}
+              <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.date }}</td>
+                <td class="td-actions text-right">
+                  <a href="{{url_for('edit_event', event_id=event.id)}}" rel="tooltip" class="btn btn-success btn-round">
+                      <i class="material-icons">edit</i>
+                  </a>
+                  <a href="{{url_for('delete_event', event_id=event.id)}}" rel="tooltip" class="btn btn-danger btn-round">
+                      <i class="material-icons">delete</i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -16,7 +16,7 @@ app.secret_key = "any random string"
 database.db = SQLAlchemy(app)
 basic_auth = BasicAuth(app)
 
-from models import Member, Financial
+from models import *
 
 database.db.create_all()
 
