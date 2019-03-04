@@ -1,0 +1,118 @@
+{% extends "template.html" %}
+{% block page_title %}Calendario{% endblock %}
+{% block content %}
+<link href="{{ url_for('static', filename='assets/css/fullcalendar.css') }}" rel="stylesheet" />
+<style>
+  
+    #wrap {
+        width: 1100px;
+        margin: 0 auto;
+        }
+        
+    #external-events {
+        float: left;
+        width: 150px;
+        padding: 0 10px;
+        text-align: left;
+        }
+        
+    #external-events h4 {
+        font-size: 16px;
+        margin-top: 0;
+        padding-top: 1em;
+        }
+        
+    .external-event { /* try to mimick the look of a real event */
+        margin: 10px 0;
+        padding: 2px 4px;
+        background: #3366CC;
+        color: #fff;
+        font-size: .85em;
+        cursor: pointer;
+        }
+        
+    #external-events p {
+        margin: 1.5em 0;
+        font-size: 11px;
+        color: #666;
+        }
+        
+    #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+        }
+
+    #calendar {
+        margin: 0 auto;
+        width: 80%;
+        background-color: #FFFFFF;
+            border-radius: 6px;
+        box-shadow: 0 1px 2px #7ead58;
+        }
+
+</style>
+<div id='wrap'>
+<div id='calendar'></div>
+<div style='clear:both'></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='assets/js/plugins/fullcalendar.js') }}" rel="stylesheet"></script>
+<script>
+    $(document).ready(function() {
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        console.log(y);
+        console.log(m);
+        /*  className colors
+        
+        className: default(transparent), important(red), chill(pink), success(green), info(blue)
+        
+        */		
+    
+        /* initialize the calendar
+        -----------------------------------------------------------------*/
+        var calendar =  $('#calendar').fullCalendar({
+            header: {
+                left: 'title',
+                center: 'agendaDay,agendaWeek,month',
+                right: 'prev,next today'
+            },
+            editable: false,
+            firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+            selectable: true,
+            defaultView: 'month',
+            
+            axisFormat: 'h:mm',
+            columnFormat: {
+                month: 'ddd',    // Mon
+                week: 'ddd d', // Mon 7
+                day: 'dddd M/d',  // Monday 9/7
+                agendaDay: 'dddd d'
+            },
+            titleFormat: {
+                month: 'MMMM yyyy', // September 2009
+                week: "MMMM yyyy", // September 2009
+                day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
+            },
+            allDaySlot: false,
+            selectHelper: true,
+            droppable: false, // this allows things to be dropped onto the calendar !!
+            events: [
+                {% for event in events %}
+                {
+                    title: '{{event.description}}',
+                    start: new Date({{event.year_date}}, {{event.month_date}}-1, {{event.day_date}}),
+                    className: "success"
+                },
+                {% endfor %}
+            ],			
+        });
+        
+        
+    });
+
+</script>
+{% endblock %}

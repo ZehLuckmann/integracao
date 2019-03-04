@@ -1,0 +1,51 @@
+
+{% extends "template.html" %}
+{% block page_title %}Produtos{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col">
+
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Membros</h4>
+        <p class="category"><a href="{{url_for('edit_product')}}" class="btn btn-success">Novo produto</a></p>
+      </div>
+      <div class="card-body table-responsive">
+          <table class="table table-shopping">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th class="text-center"></th>
+                      <th>Descrição</th>
+                      <th>Preço</th>
+                      <th class="text-right">Ações</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for product in products %}
+                  <tr>                     
+                    <td>{{ product.id }}</td>
+                    <td>
+                      <div class="img-container">
+                          <img src="{{ url_for('static', filename='resources/products') }}/{{product.id}}.png" alt="...">
+                      </div>
+                    </td>
+                    <td>{{ product.description }}</td>       
+                    <td>R$ {{ product.str_price }}</td>       
+                    <td class="td-actions text-right">
+                      <a href="{{url_for('edit_product', product_id=product.id)}}" rel="tooltip" class="btn btn-success btn-round">
+                          <i class="material-icons">edit</i>
+                      </a>
+                      <a href="{{url_for('delete_product', product_id=product.id)}}" rel="tooltip" class="btn btn-danger btn-round">
+                          <i class="material-icons">delete</i>
+                      </a>
+                    </td>              
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

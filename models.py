@@ -239,6 +239,25 @@ class Event(db.Model):
     _loaded = False
 
     @property
+    def year_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%Y'))
+        else:
+            return False
+    @property
+    def month_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%m'))
+        else:
+            return False
+    @property
+    def day_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%d'))
+        else:
+            return False
+
+    @property
     def str_date(self):
         if self.date:
             return datetime.datetime.strftime(self.date, '%Y-%m-%d')
@@ -278,4 +297,45 @@ class Event(db.Model):
     @staticmethod
     def delete(id):
         db.session.delete(Event.query.filter_by(id=id).first())
+        db.session.commit()
+
+class Product(db.Model):
+    __tablename__ = "product"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    description = db.Column(db.String)
+    about = db.Column(db.String)
+    price = db.Column(db.Float)
+
+    _loaded = False
+
+    @property
+    def str_price(self):
+        return str(self.price)
+
+    @str_price.setter
+    def str_price(self, price):
+        self.price =float(price)
+
+    def save(self):
+        if self.id != -1:
+            db.session.add(self)
+        db.session.commit()
+        db.session.flush()
+
+    @staticmethod
+    def load(id=-1):
+        if id != -1:
+            return Product.query.filter_by(id=id).first()
+        else:
+            return Product()
+
+    @staticmethod
+    def load_all():
+        result = Product.query.all()
+        return result
+
+    @staticmethod
+    def delete(id):
+        db.session.delete(Product.query.filter_by(id=id).first())
         db.session.commit()

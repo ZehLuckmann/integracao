@@ -1,0 +1,51 @@
+{% extends "template.html" %}
+{% block page_title %}Produtos{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Novo Produto</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_product',product_id=product.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Descrição</label>
+                <input type="text" class="form-control" name="description" id="description" value="{{product.description or ''}}">
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Preço</label>
+                  <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" name="price" id="price" value="{{product.str_price or ''}}">
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="file" id="product_photo[]" name="product_photo[]">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                  <label>Sobre</label>
+                  <div class="form-group">
+                    <label class="bmd-label-floating"> Detalhes do produto.</label>
+                    <textarea class="form-control" rows="5" name="about" id="about">{{product.about or ''}}</textarea>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
