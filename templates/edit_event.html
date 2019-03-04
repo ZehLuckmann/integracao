@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+{% block page_title %}Eventos{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Novo evento</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_event',event_id=event.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Descrição</label>
+                <input type="text" class="form-control" name="description" id="description" value="{{event.description or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Data</label>
+                <input type="date" class="datepicker form-control" id="date" name="date" value="{{event.str_date or ''}}">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

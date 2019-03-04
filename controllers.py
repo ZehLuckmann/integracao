@@ -13,36 +13,35 @@ def home():
 @app.route("/member/edit")
 @app.route("/member/edit/<int:member_id>", methods=['GET', 'POST'])
 def edit_member(member_id=-1):
-    member = Member.load(member_id);
+    member = Member.load(member_id)
     return render_template("edit_member.html", member=member)
 
 @app.route("/member/save", methods=['GET', 'POST'])
 @app.route("/member/save/<int:member_id>", methods=['GET', 'POST'])
 def save_member(member_id=-1):
     if request.method == "POST":
-        if member_id == -1:
-            member = Member.load(member_id)
-            member.username = request.form.get("username")
-            member.name = request.form.get("name")
-            member.nickname = request.form.get("nickname")
-            member.password = request.form.get("password")
-            member.email = request.form.get("email")
-            member.adress = request.form.get("adress")
-            member.city = request.form.get("city")
-            member.country = request.form.get("country")
-            member.telephone = request.form.get("telephone")
-            member.about = request.form.get("about")
-            profile_photo = request.files.getlist("profile_photo[]")
-            member.save()
+        member = Member.load(member_id)
+        member.username = request.form.get("username")
+        member.name = request.form.get("name")
+        member.nickname = request.form.get("nickname")
+        member.password = request.form.get("password")
+        member.email = request.form.get("email")
+        member.adress = request.form.get("adress")
+        member.city = request.form.get("city")
+        member.state = request.form.get("state")
+        member.telephone = request.form.get("telephone")
+        member.about = request.form.get("about")
+        profile_photo = request.files.getlist("profile_photo[]")
+        member.save()
 
-            dir_upload = "./static/resources/profiles/"
-            if not os.path.exists(dir_upload):
-                os.makedirs(dir_upload)
-            member_id = member.id
-            for img in profile_photo:
-                img.save(os.path.join(dir_upload, str(member_id) + ".png"))
+        dir_upload = "./static/resources/profiles/"
+        if not os.path.exists(dir_upload):
+            os.makedirs(dir_upload)
+        member_id = member.id
+        for img in profile_photo:
+            img.save(os.path.join(dir_upload, str(member_id) + ".png"))
 
-            return redirect(url_for("list_member"))
+        return redirect(url_for("list_member"))
 
 @app.route("/member/")
 @app.route('/member/list')
@@ -57,7 +56,7 @@ def delete_member(member_id):
 
 @app.route("/member/card/<int:member_id>")
 def card_member(member_id):
-    member = Member.load(member_id);
+    member = Member.load(member_id)
     return render_template("card_member.html", member=member)
 
 
@@ -82,7 +81,7 @@ def save_financial(financial_id=-1):
 
         return redirect(url_for("list_financial"))
 
-    return redirect(url_for("edit_financial"), financial_id=financial_id)
+    return redirect(url_for("edit_financial", financial_id=financial_id))
 
 @app.route("/financial/")
 @app.route('/financial/list')
@@ -112,7 +111,7 @@ def save_team(team_id=-1):
 
         return redirect(url_for("list_team"))
 
-    return redirect(url_for("edit_team"), team_id=team_id)
+    return redirect(url_for("edit_team", team_id=team_id))
 
 @app.route("/team/")
 @app.route('/team/list')
@@ -169,13 +168,13 @@ def save_training(team_id, training_id=-1):
         return redirect(url_for("list_team"))
 
     training = Training.load(training_id)
-    return redirect(url_for("edit_training"), team_id=team_id, training=training)
+    return redirect(url_for("edit_training", team_id=team_id, training=training))
 
 
 @app.route("/training/list")
 @app.route('/training/list/<int:team_id>')
 def list_training(team_id=-1):
-    if team_id==-1:
+    if team_id == -1:
         trainings = Training.load_all()
     else:
         trainings = Training.load_team(team_id)
@@ -187,3 +186,33 @@ def list_training(team_id=-1):
 def delete_training(training_id):
     Training.delete(training_id)
     return redirect(url_for('list_training'))
+
+#EVENT
+@app.route("/event/edit")
+@app.route("/event/edit/<int:event_id>", methods=['GET', 'POST'])
+def edit_event(event_id=-1):
+    event = Event.load(event_id)
+    return render_template("edit_event.html", event=event)
+
+@app.route("/event/save", methods=['GET', 'POST'])
+@app.route("/event/save/<int:event_id>", methods=['GET', 'POST'])
+def save_event(event_id=-1):
+    if request.method == "POST":
+        event = Event.load(event_id)
+        event.description = request.form.get("description")
+        event.str_date = request.form.get("date")
+        event.save()
+
+        return redirect(url_for("list_event"))
+
+@app.route("/event/")
+@app.route('/event/list')
+def list_event():
+    events = Event.load_all()
+    return render_template("list_event.html", events=events)
+
+@app.route("/event/delete/<int:event_id>")
+def delete_event(event_id):
+    Event.delete(event_id)
+    return redirect(url_for('list_event'))
+
