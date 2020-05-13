@@ -12,7 +12,7 @@ import datetime
 @app.route("/member/edit/<int:member_id>", methods=['GET', 'POST'])
 def edit_member(member_id=-1):
     member = Member.load(member_id)
-    return render_template("edit_member.html", member=member)
+    return render_template("./member/edit_member.html", member=member)
 
 
 @app.route("/member/save", methods=['GET', 'POST'])
@@ -24,6 +24,8 @@ def save_member(member_id=-1):
         member.name = request.form.get("name")
         member.nickname = request.form.get("nickname")
         member.password = request.form.get("password")
+        member.cpf = request.form.get("cpf")
+        member.plan = request.form.get("plan")
         member.email = request.form.get("email")
         member.adress = request.form.get("adress")
         member.city = request.form.get("city")
@@ -33,7 +35,7 @@ def save_member(member_id=-1):
         profile_photo = request.files.getlist("profile_photo[]")
         member.save()
 
-        dir_upload = "./static/resources/profiles/"
+        dir_upload = "../static/resources/profiles/"
         if not os.path.exists(dir_upload):
             os.makedirs(dir_upload)
         member_id = member.id
@@ -47,7 +49,7 @@ def save_member(member_id=-1):
 @app.route('/member/list')
 def list_member():
     members = Member.load_all()
-    return render_template("list_member.html", members=members)
+    return render_template("./member/list_member.html", members=members)
 
 
 @app.route("/member/delete/<int:member_id>")
@@ -59,4 +61,4 @@ def delete_member(member_id):
 @app.route("/member/card/<int:member_id>")
 def card_member(member_id):
     member = Member.load(member_id)
-    return render_template("card_member.html", member=member)
+    return render_template("./member/card_member.html", member=member)

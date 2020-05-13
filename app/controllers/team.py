@@ -13,7 +13,7 @@ import datetime
 @app.route("/team/edit/<int:team_id>", methods=['GET', 'POST'])
 def edit_team(team_id=-1):
     team = Team.load(team_id)
-    return render_template("edit_team.html", team=team)
+    return render_template("./team/edit_team.html", team=team)
 
 
 @app.route("/team/save", methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def save_team(team_id=-1):
 @app.route('/team/list')
 def list_team():
     teams = Team.load_all()
-    return render_template("list_team.html", teams=teams)
+    return render_template("./team/list_team.html", teams=teams)
 
 
 @app.route("/team/delete/<int:team_id>")
@@ -47,7 +47,7 @@ def delete_team(team_id):
 def edit_team_member(team_id=-1):
     team = Team.load(team_id)
     members = Member.load_all()
-    return render_template("edit_team_member.html", team=team, members=members)
+    return render_template("./team/edit_team_member.html", team=team, members=members)
 
 
 @app.route("/team/member/save/<int:team_id>", methods=['GET', 'POST'])

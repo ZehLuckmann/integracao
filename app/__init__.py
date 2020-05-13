@@ -22,6 +22,7 @@ from app.controllers.financial import *
 from app.controllers.product import *
 from app.controllers.team import *
 from app.controllers.training import *
+from app.controllers.subscription import *
 
 # Build the database:
 # This will create the database file using SQLAlchemy

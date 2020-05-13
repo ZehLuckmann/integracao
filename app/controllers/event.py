@@ -12,7 +12,7 @@ import datetime
 @app.route("/event/edit/<int:event_id>", methods=['GET', 'POST'])
 def edit_event(event_id=-1):
     event = Event.load(event_id)
-    return render_template("edit_event.html", event=event)
+    return render_template("./event/edit_event.html", event=event)
 
 
 @app.route("/event/save", methods=['GET', 'POST'])
@@ -21,7 +21,9 @@ def save_event(event_id=-1):
     if request.method == "POST":
         event = Event.load(event_id)
         event.description = request.form.get("description")
+        event.category = request.form.get("category")
         event.str_date = request.form.get("date")
+        event.str_time = request.form.get("time")
         event.save()
 
         return redirect(url_for("list_event"))
@@ -31,7 +33,7 @@ def save_event(event_id=-1):
 @app.route('/event/list')
 def list_event():
     events = Event.load_all()
-    return render_template("list_event.html", events=events)
+    return render_template("./event/list_event.html", events=events)
 
 
 @app.route("/event/delete/<int:event_id>")

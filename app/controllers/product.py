@@ -11,7 +11,7 @@ import os
 @app.route("/product/edit/<int:product_id>", methods=['GET', 'POST'])
 def edit_product(product_id=-1):
     product = Product.load(product_id)
-    return render_template("edit_product.html", product=product)
+    return render_template("./product/edit_product.html", product=product)
 
 
 @app.route("/product/save", methods=['GET', 'POST'])
@@ -21,11 +21,12 @@ def save_product(product_id=-1):
         product = Product.load(product_id)
         product.description = request.form.get("description")
         product.about = request.form.get("about")
+        product.category = int(request.form.get("category", 99))
         product.str_price = request.form.get("price")
         product_photo = request.files.getlist("product_photo[]")
         product.save()
 
-        dir_upload = "./static/resources/products/"
+        dir_upload = "../static/resources/products/"
         if not os.path.exists(dir_upload):
             os.makedirs(dir_upload)
         product_id = product.id
@@ -39,7 +40,7 @@ def save_product(product_id=-1):
 @app.route('/product/list')
 def list_product():
     products = Product.load_all()
-    return render_template("list_product.html", products=products)
+    return render_template("./product/list_product.html", products=products)
 
 
 @app.route("/product/delete/<int:product_id>")

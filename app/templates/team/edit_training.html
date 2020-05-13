@@ -1,0 +1,57 @@
+{% extends "template.html" %}
+{% block page_title %}Equipes{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Novo Treino</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_training',team_id=team.id, training_id=training.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Descrição</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{training.description or 'Treino '+team.description }}">
+              </div>              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Data</label>
+                <input type="date" class="datepicker form-control" id="date" name="date" value="{{training.str_date or ''}}">
+              </div>              
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Hora</label>
+                <input type="time" class="datepicker form-control" id="time" name="time" value="{{training.str_time or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Numero de repetições</label>
+                <input type="number" class="form-control" name="repeats" id="repeats" value="{{training.repeats or '1'}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Dias de Intervalo</label>
+                <input type="number" class="form-control" name="days_interval" id="days_interval" value="{{training.days_interval or ''}}">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

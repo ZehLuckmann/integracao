@@ -1,0 +1,58 @@
+{% extends "template.html" %}
+{% block page_title %}Eventos{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Novo evento</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_event',event_id=event.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label class="bmd-label-floating">Descrição</label>
+                <input type="text" class="form-control" name="description" id="description" value="{{event.description or ''}}">
+              </div>
+            </div>                    
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Data</label>
+                <input type="date" class="datepicker form-control" id="date" name="date" value="{{event.str_date or ''}}">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Hora</label>
+                <input type="time" class="datepicker form-control" id="time" name="time" value="{{event.str_time or ''}}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Categoria</label>
+                <select class="form-control selectpicker" data-style="btn btn-link" id="category" name="category">
+                  <option value="esportivo" {{event.category=='esportivo' if enabled}} >Esportivo</option>
+                  <option value="festa" {{event.category=='esportivo' if enabled}}>Festa</option>
+                  <option value="solidario" {{event.category=='solidario' if enabled}}>Solidário</option>                  
+                  <option value="academico" {{event.category=='academico' if enabled}}>Academico</option>
+                  <option value="adminstrativo" {{event.category=='adminstrativo' if enabled}}>Adminstrativo</option>
+                  <option value="outros" {{enabled if event.category=='outros'}}>Outros</option>   
+                </select>
+              </div>
+            </div>    
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

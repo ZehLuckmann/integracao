@@ -12,10 +12,33 @@ class Training(db.Model):
     __tablename__ = "training"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    description = db.Column(db.String)
     date = db.Column(db.DateTime)
+    time = db.Column(db.DateTime)
     team_id = db.Column(db.Integer, db.ForeignKey('team.id'))
 
     _loaded = False
+
+    @property
+    def year_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%Y'))
+        else:
+            return False
+
+    @property
+    def month_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%m'))
+        else:
+            return False
+
+    @property
+    def day_date(self):
+        if self.date:
+            return int(datetime.datetime.strftime(self.date, '%d'))
+        else:
+            return False
 
     @property
     def str_date(self):
@@ -58,3 +81,14 @@ class Training(db.Model):
     def delete(id):
         db.session.delete(Training.query.filter_by(id=id).first())
         db.session.commit()
+
+    @property
+    def str_time(self):
+        if self.time:
+            return datetime.datetime.strftime(self.time, '%H:%M')
+        else:
+            return False
+
+    @str_time.setter
+    def str_time(self, value):
+        self.time = datetime.datetime.strptime(value, '%H:%M')

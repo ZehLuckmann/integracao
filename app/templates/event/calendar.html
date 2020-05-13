@@ -108,10 +108,15 @@
                     className: "success"
                 },
                 {% endfor %}
+                {% for train in trainings %}
+                {
+                    title: '{{train.description}}',
+                    start: new Date({{train.year_date}}, {{train.month_date}}-1, {{train.day_date}}),
+                    className: "success"
+                },
+                {% endfor %}
             ],			
         });
-        
-        
     });
 
 </script>

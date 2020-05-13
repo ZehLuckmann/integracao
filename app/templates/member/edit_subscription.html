@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+{% block page_title %}Financeiro{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Novo lançamento</h4>
+        <p class="card-category">Complete o cadastro</p>
+      </div>
+      <div class="card-body">
+        <form action="{{url_for('save_subscription',member_id=member.id,subscription_id=subscription.id)}}" method="POST" role="form" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Data</label>
+                <input type="date" class="datepicker form-control" id="date" name="date" value="{{subscription.str_date or ''}}">
+              </div>
+            </div>            
+          </div>   
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Plano</label>
+                <select class="form-control selectpicker" data-style="btn btn-link" id="plan" name="plan">
+                  <option value="socio junior">Sócio Junior</option>
+                  <option value="socio pleno">Sócio Pleno</option>
+                  <option value="socio senior">Sócio Senior</option>                  
+                  <option value="atleta">Atleta</option>
+                  <option value="formado">Formado</option>
+                  <option value="diretoria">Diretoria</option>   
+                  <option value="agregado">Agregado</option>               
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success pull-right">Salvar</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}

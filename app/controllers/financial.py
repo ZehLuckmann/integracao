@@ -12,7 +12,7 @@ import datetime
 @app.route("/financial/edit/<int:financial_id>", methods=['GET', 'POST'])
 def edit_financial(financial_id=-1):
     financial = Financial.load(financial_id)
-    return render_template("edit_financial.html", financial=financial)
+    return render_template("./financial/edit_financial.html", financial=financial)
 
 
 @app.route("/financial/save", methods=['GET', 'POST'])
@@ -36,7 +36,7 @@ def save_financial(financial_id=-1):
 @app.route('/financial/list')
 def list_financial():
     financials = Financial.load_all()
-    return render_template("list_financial.html", financials=financials)
+    return render_template("./financial/list_financial.html", financials=financials)
 
 
 @app.route("/financial/delete/<int:financial_id>")

@@ -13,7 +13,8 @@ class Event(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime)
-    category = db.Column(db.Integer)
+    time = db.Column(db.DateTime)
+    category = db.Column(db.String)
     description = db.Column(db.String)
 
     _loaded = False
@@ -44,12 +45,23 @@ class Event(db.Model):
         if self.date:
             return datetime.datetime.strftime(self.date, '%Y-%m-%d')
         else:
-            return False
+            return False    
 
     @str_date.setter
     def str_date(self, value):
         self.date = datetime.datetime.strptime(value, '%Y-%m-%d')
 
+    @property
+    def str_time(self):
+        if self.time:
+            return datetime.datetime.strftime(self.time, '%H:%M')
+        else:
+            return False
+
+    @str_time.setter
+    def str_time(self, value):
+        self.time = datetime.datetime.strptime(value, '%H:%M')
+        
     def save(self):
         if self.id != -1:
             db.session.add(self)

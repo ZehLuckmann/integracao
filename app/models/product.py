@@ -15,6 +15,7 @@ class Product(db.Model):
     description = db.Column(db.String)
     about = db.Column(db.String)
     price = db.Column(db.Float)
+    category = db.Column(db.Integer)
 
     _loaded = False
 

@@ -13,10 +13,10 @@ class Financial(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     value = db.Column(db.Float)
-    type = db.Column(db.Integer)
+    type = db.Column(db.String)
     description = db.Column(db.String)
     date = db.Column(db.DateTime)
-    category = db.Column(db.Integer)
+    category = db.Column(db.String)
 
     _loaded = False
 
@@ -76,7 +76,7 @@ class Financial(db.Model):
 
     @staticmethod
     def load(id=-1):
-        if id != -1:
+        if id and id != -1:
             return Financial.query.filter_by(id=id).first()
         else:
             return Financial()

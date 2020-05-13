@@ -17,6 +17,7 @@
             <th>ID</th>
             <th>Descrição</th>
             <th>Data</th>
+            <th>Hora</th>
             <th class="text-right">Ações</th>
           </thead>
           <tbody>
@@ -24,7 +25,8 @@
               <tr>
                 <td>{{ event.id }}</td>
                 <td>{{ event.description }}</td>
-                <td>{{ event.date }}</td>
+                <td>{{ event.str_date }}</td>
+                <td>{{ event.str_time }}</td>
                 <td class="td-actions text-right">
                   <a href="{{url_for('edit_event', event_id=event.id)}}" rel="tooltip" class="btn btn-success btn-round">
                       <i class="material-icons">edit</i>

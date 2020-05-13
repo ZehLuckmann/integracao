@@ -16,10 +16,12 @@ class Member(db.Model):
     password = db.Column(db.String)
     name = db.Column(db.String)
     nickname = db.Column(db.String)
+    plan = db.Column(db.String)
     email = db.Column(db.String)
     adress = db.Column(db.String)
     city = db.Column(db.String)
     state = db.Column(db.String)
+    cpf = db.Column(db.String)
     telephone = db.Column(db.String)
     about = db.Column(db.String)
 
