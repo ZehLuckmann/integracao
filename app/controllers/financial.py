@@ -23,8 +23,8 @@ def save_financial(financial_id=-1):
         financial.str_date = request.form.get("date")
         financial.str_value = request.form.get("value")
         financial.description = request.form.get("description")
-        financial.type = int(request.form.get("type"))
-        financial.category = int(request.form.get("category"))
+        financial.type = request.form.get("type")
+        financial.category = request.form.get("category")
         financial.save()
 
         return redirect(url_for("list_financial"))

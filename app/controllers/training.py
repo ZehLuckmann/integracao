@@ -27,7 +27,7 @@ def save_training(team_id, training_id=-1):
         repeat = int(request.form.get("repeats"))
         days_interval = int(request.form.get("days_interval", 0))
         training_date = datetime.datetime.strptime(request.form.get("date"), '%Y-%m-%d')
-        training_time = datetime.datetime.strptime(request.form.get("date"), '%H:%M')
+        training_time = datetime.datetime.strptime(request.form.get("time"), '%H:%M')
         training_description = request.form.get("description")
         for i in range(repeat):
             training = Training.load(training_id)

@@ -35,7 +35,7 @@ def save_member(member_id=-1):
         profile_photo = request.files.getlist("profile_photo[]")
         member.save()
 
-        dir_upload = "../static/resources/profiles/"
+        dir_upload = "./app/static/resources/profiles/"
         if not os.path.exists(dir_upload):
             os.makedirs(dir_upload)
         member_id = member.id

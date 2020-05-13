@@ -27,27 +27,29 @@ class Financial(db.Model):
 
     @property
     def str_category(self):
-        if self.category == 1:
-            return "Saída"
-        elif self.category == 2:
-            return "Entrada"
+        if self.category == "evento":
+            return "Evento"
+        elif self.category == "parceria":
+            return "Parceria"
+        elif self.category == "patrocinio":
+            return "Patrocínio"
+        elif self.category == "fornecedor":
+            return "Fornecedor"
+        elif self.category == "assinatura":
+            return "Assinatura"
+        elif self.category == "outros":
+            return "Outros"
         else:
-            return "Desconhecida"
+            return self.category
 
     @property
     def str_type(self):
-        if self.category == 1:
-            return "Evento"
-        elif self.category == 2:
-            return "Parceria"
-        elif self.category == 3:
-            return "Patrocínio"
-        elif self.category == 4:
-            return "Fornecedor"
-        elif self.category == 5:
-            return "Outros"
+        if self.type == "saida":
+            return "Saída"
+        elif self.type == "entrada":
+            return "Entrada"
         else:
-            return "Desconhecida"
+            return self.type    
 
     @property
     def str_value(self):

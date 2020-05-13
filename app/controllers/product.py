@@ -26,7 +26,7 @@ def save_product(product_id=-1):
         product_photo = request.files.getlist("product_photo[]")
         product.save()
 
-        dir_upload = "../static/resources/products/"
+        dir_upload = "./app/static/resources/products/"
         if not os.path.exists(dir_upload):
             os.makedirs(dir_upload)
         product_id = product.id
